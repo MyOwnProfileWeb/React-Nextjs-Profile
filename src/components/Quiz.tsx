@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Button } from 'primereact/button';
+// @ts-ignore
+import { Graph } from 'react-d3-graph';
 
 // Define types for the correct answers and selected state
 type Answers = {
@@ -50,10 +52,31 @@ const Quizz = () => {
         });
     };
 
+    // Graph configuration
+    const data = {
+        nodes: [
+            ...column1.map(work => ({ id: work, symbolType: 'square' })),
+            ...shuffledColumn2.map(author => ({ id: author }))
+        ],
+        links: Object.entries(selected).map(([work, author]) => ({ source: work, target: author }))
+    };
+
+    const config = {
+        nodeHighlightBehavior: true,
+        node: {
+            color: 'lightblue',
+            size: 120,
+            highlightStrokeColor: 'blue'
+        },
+        link: {
+            highlightColor: 'lightblue'
+        }
+    };
+
     return (
         <div className="flex flex-col items-center min-h-screen p-8">
             <h1 className="text-2xl font-bold mb-4">Matching Quiz</h1>
-            <p>Match the works with their authors. Click on the author's name to match it with the work. first author clicked belongs to first work.</p>
+            <p>Match the works with their authors. Click on the author's name to match it with the work. First author clicked belongs to first work.</p>
             <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
@@ -82,6 +105,13 @@ const Quizz = () => {
                 >
                     Submit
                 </Button>
+            </div>
+            <div className="mt-8 w-full max-w-md">
+                <Graph
+                    id="graph-id"
+                    data={data}
+                    config={config}
+                />
             </div>
         </div>
     );

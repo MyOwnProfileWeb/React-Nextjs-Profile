@@ -9,7 +9,6 @@ const themeService = () => {
     const [themes, setThemes] = useState<Theme[]>([]);
     const [currentColorTheme, setCurrentColorTheme] = useState<string>('');
 
-    // Fetch color themes from the API
     const fetchColorThemes = async () => {
         try {
             const response = await fetch('/api/themes');
@@ -23,7 +22,6 @@ const themeService = () => {
         }
     };
 
-    // Apply the selected color theme
     const applyColorTheme = (colorTheme: string) => {
         const existingLinks = document.querySelectorAll('link[rel="stylesheet"][data-theme]');
         existingLinks.forEach(link => link.remove());

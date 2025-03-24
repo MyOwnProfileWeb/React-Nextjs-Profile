@@ -11,9 +11,8 @@ const Header: React.FC<{ setTheme: (theme: string) => void }> = ({ setTheme }) =
 
     const items = [
         { label: 'Home', icon: 'pi pi-fw pi-home', command: () => { window.location.href = '/'; } },
-        { label: 'Contacts', icon: 'pi pi-fw pi-users', command: () => { window.location.href = '/contact'; } },
         { label: 'About', icon: 'pi pi-fw pi-info', command: () => { window.location.href = '/about'; } },
-        { label: 'Skills', icon: 'pi pi-fw pi-cog', command: () => { window.location.href = '/experience'; } },
+        { label: 'Experience', icon: 'pi pi-fw pi-cog', command: () => { window.location.href = '/experience'; } },
     ];
 
     return (
